@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <title>Animal Sound Recongnition</title>
+</head>
+<body style="text-align:center; background-color:lightblue;">
+    <br><img id="picture" width="350" height="350" src="https://media.istockphoto.com/vectors/sound-waves-motion-sound-wave-abstract-background-vector-id1176100626?k=20&m=1176100626&s=612x612&w=0&h=vl-hfVdQnFD-rEmRvTUI8f_QC0WGek3JXZPCJLAkow8="><br><br>
+    <button class="btn btn-success" onclick="audio()"><h3>Click Me and make a Roaring, Hissing, Meowing, or a Barking Sound!</h3></button>
+    <script>
+        function audio(){
+const classifier = ml5.soundClassifier('https://storage.googleapis.com/tm-model/uvIKrMDuv/model.json', {probabilityThreshold: 0.7},modelReady);
+function modelReady() {
+  classifier.classify(gotResult);
+}
+function gotResult(error, result) {
+  if (error) {
+    console.log(error);
+    return;
+  }
+  if(result[0]['label']=='Background Noise'){
+document.getElementById('picture').src="https://media.istockphoto.com/vectors/sound-waves-motion-sound-wave-abstract-background-vector-id1176100626?k=20&m=1176100626&s=612x612&w=0&h=vl-hfVdQnFD-rEmRvTUI8f_QC0WGek3JXZPCJLAkow8="
+  }
+  else if(result[0]['label']=='Cat'){
+document.getElementById('picture').src="https://as1.ftcdn.net/v2/jpg/02/95/94/94/1000_F_295949484_8BrlWkTrPXTYzgMn3UebDl1O13PcVNMU.jpg"
+  }
+  else if(result[0]['label']=="Dog"){
+document.getElementById('picture').src="https://thumbs.dreamstime.com/b/beautiful-happy-reddish-havanese-puppy-dog-sitting-frontal-looking-camera-isolated-white-background-46868560.jpg"
+  }
+  else if(result[0]['label']=="Roar"){
+document.getElementById('picture').src="https://images.unsplash.com/photo-1614027164847-1b28cfe1df60?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8&w=1000&q=80"
+  }
+  else if(result[0]['label']="Snakes or ''S-ing''"){
+document.getElementById('picture').src="https://www.thesprucepets.com/thmb/3orGbmBDmEZnp8fSxPvS64dFFnw=/1889x1417/smart/filters:no_upscale()/GettyImages-135615052-57d5d0075f9b589b0a6b87e6.jpg"
+  }
+}  }
+    </script>
+</body>
+</html>
